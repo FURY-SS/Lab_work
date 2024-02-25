@@ -1,0 +1,317 @@
+#include <stdio.h>
+#include <assert.h>
+#include "libs/data_structures/bitset/bitset.h"
+
+
+// Тесты с битовыми множествами
+
+//Тест на наличие элемента в множестве
+void test_bitset_create_from_array_1() {
+    bitset set = bitset_create_from_array((uint32_t[]){1,2,3,4,5}, 5, 5);
+    assert(bitset_in(set, 5));
+}
+
+void test_bitset_create_from_array_2() {
+    bitset set = bitset_create_from_array((uint32_t[]){1,2,3,4,5}, 5, 5);
+    assert(!bitset_in(set, 8));
+}
+
+void test_bitset_in() {
+    test_bitset_create_from_array_1();
+    test_bitset_create_from_array_2();
+}
+
+//Тест на равенство множеств
+void test_bitset_equals_1() {
+    bitset set1 = bitset_create_from_array((uint32_t[]){1,2,3,4,5}, 5, 5);
+    bitset set2 = bitset_create_from_array((uint32_t[]){1,2,3,4,5}, 5, 5);
+
+    assert(bitset_is_equal(set1, set2));
+}
+
+void test_bitset_equals_2() {
+    bitset set1 = bitset_create_from_array((uint32_t[]){1,2,3,4,5}, 5, 5);
+    bitset set2 = bitset_create_from_array((uint32_t[]){1,2,3,7,8}, 5, 5);
+
+    assert(!bitset_is_equal(set1, set2));
+}
+
+void test_bitset_equals() {
+    test_bitset_equals_1();
+    test_bitset_equals_2();
+}
+
+// Тест является ли множество подмножеством др. множества
+void test_bitset_is_subset_1() {
+    bitset set1 = bitset_create_from_array((uint32_t[]){1,2,3}, 3, 3);
+    bitset set2 = bitset_create_from_array((uint32_t[]){1,2,3,4,5}, 5, 5);
+
+    assert(bitset_is_subset(set1, set2));
+}
+
+void test_bitset_is_subset_2() {
+    bitset set1 = bitset_create_from_array((uint32_t[]){1,2,3, 4, 3}, 5, 5);
+    bitset set2 = bitset_create_from_array((uint32_t[]){1,2,3}, 3, 3);
+
+    assert(!bitset_is_subset(set1, set2));
+}
+
+void test_bitset_is_subset_3() {
+    bitset set1 = bitset_create_from_array((uint32_t[]){1,2,6}, 3, 3);
+    bitset set2 = bitset_create_from_array((uint32_t[]){1,2,3,4,5}, 5, 5);
+
+    assert(!bitset_is_subset(set1, set2));
+}
+
+void test_bitset_is_subset() {
+    test_bitset_is_subset_1();
+    test_bitset_is_subset_2();
+    test_bitset_is_subset_3();
+}
+
+//Тест на вставку элемента в множество
+void test_bitset_insert_1() {
+    bitset set = bitset_create_from_array((uint32_t[]){1, 2}, 2, 5);
+    bitset_insert(&set, 3);
+    bitset check_set = bitset_create_from_array((uint32_t[]){1, 2, 3}, 3, 5);
+
+    assert(bitset_is_equal(set, check_set));
+}
+
+void test_bitset_insert_2() {
+    bitset set = bitset_create_from_array((uint32_t[]){1, 2}, 2, 5);
+    bitset_insert(&set, 2);
+    bitset check_set = bitset_create_from_array((uint32_t[]){1, 2}, 2, 5);
+
+    assert(bitset_is_equal(set, check_set));
+}
+
+void test_bitset_insert() {
+    test_bitset_insert_1();
+    test_bitset_insert_2();
+}
+
+//Тест на удаление элемента из множества
+void test_bitset_delete_element_1() {
+    bitset set = bitset_create_from_array((uint32_t[]){1, 2, 3, 4, 5}, 5, 5);
+    bitset_delete_element(&set, 5);
+    bitset check_set = bitset_create_from_array((uint32_t[]){1, 2, 3, 4}, 4, 5);
+
+    assert(bitset_is_equal(set, check_set));
+}
+
+void test_bitset_delete_element_2() {
+    bitset set = bitset_create_from_array((uint32_t[]){1, 2, 3, 4, 5}, 5, 5);
+    bitset_delete_element(&set, 6);
+    bitset check_set = bitset_create_from_array((uint32_t[]){1, 2, 3, 4, 5}, 5, 5);
+
+    assert(bitset_is_equal(set, check_set));
+}
+
+void test_bitset_delete_element() {
+    test_bitset_delete_element_1();
+    test_bitset_delete_element_2();
+}
+
+//Тест на объединение множеств
+void test_bitset_union_1() {
+    bitset set1 = bitset_create_from_array((uint32_t[]){1, 2, 3}, 3, 3);
+    bitset set2 = bitset_create_from_array((uint32_t[]){1, 2, 3}, 3, 3);
+    bitset set = bitset_union(set1, set2);
+
+    bitset check_set = bitset_create_from_array((uint32_t[]){1, 2, 3}, 3, 3);
+
+    assert(bitset_is_equal(set, check_set));
+}
+
+void test_bitset_union_2() {
+    bitset set1 = bitset_create_from_array((uint32_t[]){1, 2, 3}, 3, 5);
+    bitset set2 = bitset_create_from_array((uint32_t[]){1, 2, 3, 4, 5}, 5, 5);
+    bitset set = bitset_union(set1, set2);
+
+    bitset check_set = bitset_create_from_array((uint32_t[]){1, 2, 3, 4, 5}, 5, 5);
+
+    assert(bitset_is_equal(set, check_set));
+}
+
+void test_bitset_union_3() {
+    bitset set1 = bitset_create_from_array((uint32_t[]){1, 2, 3}, 3, 6);
+    bitset set2 = bitset_create_from_array((uint32_t[]){ 4, 5, 6}, 3, 6);
+    bitset set = bitset_union(set1, set2);
+
+    bitset check_set = bitset_create_from_array((uint32_t[]){1, 2, 3, 4, 5, 6}, 6, 6);
+
+    assert(bitset_is_equal(set, check_set));
+}
+
+void test_bitset_union() {
+    test_bitset_union_1();
+    test_bitset_union_2();
+    test_bitset_union_3();
+}
+
+//Тест на пересечение множеств
+void test_bitset_intersection_1() {
+    bitset set1 = bitset_create_from_array((uint32_t[]){1, 2, 3, 4, 5}, 5, 10);
+    bitset set2 = bitset_create_from_array((uint32_t[]){4, 5, 6}, 3, 10);
+    bitset res_set = bitset_intersection(set1, set2);
+
+    bitset check_set = bitset_create_from_array((uint32_t[]){4, 5}, 2, 10);
+
+    assert(bitset_is_equal(res_set, check_set));
+}
+
+void test_bitset_intersection_2() {
+    bitset set1 = bitset_create_from_array((uint32_t[]){1, 2, 3}, 3, 10);
+    bitset set2 = bitset_create_from_array((uint32_t[]){4, 5, 6}, 3, 10);
+    bitset res_set = bitset_intersection(set1, set2);
+
+    bitset check_set = bitset_create_from_array((uint32_t[]){}, 0, 10);
+
+    assert(bitset_is_equal(res_set, check_set));
+}
+
+void test_bitset_intersection_3() {
+    bitset set1 = bitset_create_from_array((uint32_t[]){1, 2, 3, 4, 5}, 5, 10);
+    bitset set2 = bitset_create_from_array((uint32_t[]){1, 2, 3, 4, 5}, 5, 10);
+    bitset res_set = bitset_intersection(set1, set2);
+
+    bitset check_set = bitset_create_from_array((uint32_t[]){1, 2, 3, 4, 5}, 5, 10);
+
+    assert(bitset_is_equal(res_set, check_set));
+}
+
+void test_bitset_intersection() {
+    test_bitset_intersection_1();
+    test_bitset_intersection_2();
+    test_bitset_intersection_3();
+}
+
+//Тест на разность множеств
+void test_bitset_difference_1() {
+    bitset set1 = bitset_create_from_array((uint32_t[]){1, 2, 3}, 3, 10);
+    bitset set2 = bitset_create_from_array((uint32_t[]){1, 2, 5}, 3, 10);
+    bitset res_set = bitset_difference(set1, set2);
+
+    bitset check_set = bitset_create_from_array((uint32_t[]){3}, 1, 10);
+
+    assert(bitset_is_equal(res_set, check_set));
+}
+
+void test_bitset_difference_2() {
+    bitset set1 = bitset_create_from_array((uint32_t[]){1, 2, 3}, 3, 10);
+    bitset set2 = bitset_create_from_array((uint32_t[]){}, 0, 10);
+    bitset res_set = bitset_difference(set1, set2);
+
+    bitset check_set = bitset_create_from_array((uint32_t[]){1,2,3}, 3, 10);
+
+    assert(bitset_is_equal(res_set, check_set));
+}
+
+void test_bitset_difference_3() {
+    bitset set1 = bitset_create_from_array((uint32_t[]){1, 2, 3}, 3, 10);
+    bitset set2 = bitset_create_from_array((uint32_t[]){1,2,3}, 3, 10);
+    bitset res_set = bitset_difference(set1, set2);
+
+    bitset check_set = bitset_create_from_array((uint32_t[]){}, 0, 10);
+
+    assert(bitset_is_equal(res_set, check_set));
+}
+
+void test_bitset_difference() {
+    test_bitset_difference_1();
+    test_bitset_difference_2();
+    test_bitset_difference_3();
+}
+
+//Тест на симметрическую разность множеств
+void test_bitset_symmetric_difference_1() {
+    bitset set1 = bitset_create_from_array((uint32_t[]){1, 2, 3}, 3, 10);
+    bitset set2 = bitset_create_from_array((uint32_t[]){3,4,5}, 3, 10);
+    bitset res_set = bitset_symmetric_difference(set1, set2);
+
+    bitset check_set = bitset_create_from_array((uint32_t[]){1,2,4,5}, 4, 10);
+
+    assert(bitset_is_equal(res_set, check_set));
+}
+
+void test_bitset_symmetric_difference_2() {
+    bitset set1 = bitset_create_from_array((uint32_t[]){1, 2, 3}, 3, 10);
+    bitset set2 = bitset_create_from_array((uint32_t[]){4,5,6}, 3, 10);
+    bitset res_set = bitset_symmetric_difference(set1, set2);
+
+    bitset check_set = bitset_create_from_array((uint32_t[]){1,2,3,4,5,6}, 6, 10);
+
+    assert(bitset_is_equal(res_set, check_set));
+}
+
+void test_bitset_symmetric_difference_3() {
+    bitset set1 = bitset_create_from_array((uint32_t[]){1, 2, 3}, 3, 10);
+    bitset set2 = bitset_create_from_array((uint32_t[]){1,2,3}, 3, 10);
+    bitset res_set = bitset_symmetric_difference(set1, set2);
+
+    bitset check_set = bitset_create_from_array((uint32_t[]){}, 0, 10);
+
+    assert(bitset_is_equal(res_set, check_set));
+}
+
+void test_bitset_symmetric_difference() {
+    test_bitset_symmetric_difference_1();
+    test_bitset_symmetric_difference_2();
+    test_bitset_symmetric_difference_3();
+}
+
+// тест на дополнение множества
+void test_bitset_complement_1() {
+    bitset set = bitset_create_from_array((uint32_t[]){1, 2, 3,4,5}, 5, 10);
+    bitset res_set = bitset_complement(set);
+
+    bitset check_set = bitset_create_from_array((uint32_t[]){0, 6, 7, 8, 9,10}, 6, 10);
+
+    assert(bitset_is_equal(res_set, check_set));
+}
+
+void test_bitset_complement_2() {
+    bitset set = bitset_create_from_array((uint32_t[]){0,1, 2, 3,4,5}, 6, 5);
+    bitset res_set = bitset_complement(set);
+
+    bitset check_set = bitset_create_from_array((uint32_t[]){}, 0, 5);
+
+    assert(bitset_is_equal(res_set, check_set));
+}
+
+void test_bitset_complement_3() {
+    bitset set = bitset_create_from_array((uint32_t[]){}, 0, 5);
+    bitset res_set = bitset_complement(set);
+
+    bitset check_set = bitset_create_from_array((uint32_t[]){0,1,2,3,4,5}, 6, 5);
+
+    assert(bitset_is_equal(res_set, check_set));
+}
+
+
+void test_bitset_complement() {
+    test_bitset_complement_1();
+    test_bitset_complement_2();
+    test_bitset_complement_3();
+}
+
+void test_bitset() {
+    test_bitset_in();
+    test_bitset_equals();
+    test_bitset_is_subset();
+    test_bitset_insert();
+    test_bitset_delete_element();
+    test_bitset_union();
+    test_bitset_intersection();
+    test_bitset_difference();
+    test_bitset_symmetric_difference();
+    test_bitset_complement();
+}
+
+
+int main() {
+    test_bitset();
+
+    return 0;
+}
