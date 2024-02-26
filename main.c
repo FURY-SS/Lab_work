@@ -34,12 +34,10 @@ void test_pop_back_not_empty_vector() {
 }
 
 void test_at_vector_not_empty_vector() {
-    vector v = create_vector(1);
-    push_back(&v, 5);
-    assert(is_full(&v));
+    int array[] = {5};
+    vector v = {array, 1, 1};
 
     int* element = at_vector(&v, 0);
-
     assert(*element == 5);
 }
 
@@ -52,25 +50,20 @@ void test_at_vector_request_to_last_element() {
 }
 
 void test_back_one_element_in_vector() {
-    vector v = create_vector(2);
-    push_back(&v, 5);
-    push_back(&v, 6);
-    assert(is_full(&v));
+    int array[] = {1, 2, 3};
+    vector v = {array, 3, 3};
 
     int* element = back(&v);
-
-    assert(*element == 6);
+    assert(*element == 3);
 }
 
 void test_front_one_element_in_vector() {
-    vector v = create_vector(2);
-    push_back(&v, 5);
-    push_back(&v, 6);
-    assert(is_full(&v));
+    int array[] = {1,2,3};
+    vector v = {array, 3, 3};
 
     int* element = front(&v);
 
-    assert(*element == 5);
+    assert(*element == 1);
 }
 
 void test() {
