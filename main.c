@@ -67,7 +67,7 @@ void test_front_one_element_in_vector() {
     assert(*element == 1);
 }
 
-void test() {
+void test_vector() {
     test_push_back_empty_vector();
     test_push_back_full_vector();
     test_pop_back_not_empty_vector();
@@ -77,24 +77,91 @@ void test() {
     test_front_one_element_in_vector();
 }
 
+void test_push_back_v_empty_vector() {
+    vector_void v = create_vector_void(0, sizeof(int));
+    v.size = 0;
+    assert(is_empty_v(&v));
+
+    int x = 1;
+    push_back_v(&v, &x);
+
+    assert(v.size == 1 && v.capacity == 1);
+}
+
+
+void test_push_back_v_full_vector() {
+    vector_void v = create_vector_void(1, sizeof(float));
+    v.size = 1;
+    assert(is_full_v(&v));
+
+    float x = 2.3;
+    push_back_v(&v, &x);
+
+    assert(v.size == 2 && v.capacity == 2);
+}
+
+void test_get_vector_value_v() {
+    float array[] = {5.55, 6.56, 7.243};
+    vector_void v = {array, 3, 3, sizeof(float)};
+
+    float x = 8.23;
+    float y = 7.243;
+    get_vector_value_v(&v, 2, &x);
+
+    assert(is_full_v(&v));
+    assert(x == y);
+}
+
+void test_set_vector_value_v() {
+    float array[] = {5.55, 6.56, 7.243};
+    vector_void v = {array, 3, 3, sizeof(float)};
+
+    float x = 8.23;
+    set_vector_value_v(&v, 2, &x);
+
+    assert(is_full_v(&v));
+}
+
+void test_vector_shrink_to_fit_v() {
+    int array[] = {1, 2, 3};
+    vector_void v = {array, 3, 30, sizeof(int)};
+
+    vector_shrink_to_fit_v(&v);
+    assert(is_full_v(&v));
+}
+
+void test_clear_v() {
+    int array[] = {1, 2, 3};
+    vector_void v = {array, 3, 3, sizeof(int)};
+
+    clear_v(&v);
+    assert(is_empty_v(&v));
+}
+
+void test_pop_back_v() {
+    int array[] = {1, 2, 3};
+    vector_void v = {array, 3, 3, sizeof(int)};
+
+    pop_back_v(&v);
+    assert(v.size == 2);
+}
+
+void test_vector_void() {
+    test_push_back_v_empty_vector();
+    test_push_back_v_full_vector();
+    test_get_vector_value_v();
+    test_set_vector_value_v();
+    test_vector_shrink_to_fit_v();
+    test_clear_v();
+}
+
+void test() {
+    test_vector();
+    test_vector_void();
+}
+
 int main () {
-    size_t n;
-    scanf("%zd", &n);
-
-    vector_void v = create_vector_void(0, sizeof(float));
-    for (int i = 0; i < n; i++) {
-        float x;
-        scanf("%f", &x);
-
-        push_back_v(&v, &x);
-    }
-
-    for (int i = 0; i < n; i++) {
-        float x;
-        get_vector_value_v(&v, i, &x);
-
-        printf("%f ", x);
-    }
+    test();
 
     return 0;
 }

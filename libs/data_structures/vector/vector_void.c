@@ -49,10 +49,7 @@ void clear_v(vector_void *v) {
 }
 
 void vector_shrink_to_fit_v(vector_void *v) {
-    if (v->size != v->capacity) {
-        v->data = (void *) realloc(v->data, v->size * v->base_type_size);
-        v->capacity = v->size;
-    }
+    v->capacity = v->size;
 }
 
 bool is_empty_v(vector_void *v) {
