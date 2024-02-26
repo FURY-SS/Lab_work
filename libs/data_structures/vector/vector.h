@@ -45,4 +45,13 @@ void push_back(vector *v, int x);
 // удаляет последний элемент из вектора.
 void pop_back(vector *v);
 
+// возвращает указатель на index-ый элемент вектора.
+int* at_vector(vector *v, size_t index);
+
+// возвращает указатель на последний элемент вектора.
+int* back(vector *v);
+
+// возвращает указатель на нулевой элемент вектора.
+int* front(vector *v);
+
 #endif //UNTITLED_VECTOR_H
