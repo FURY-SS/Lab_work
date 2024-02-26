@@ -63,7 +63,12 @@ bool is_full(vector *v) {
 }
 
 int get_vector_value(vector *v, size_t i) {
-    return v->data[i];
+    if (i >= v->size) {
+        fprintf(stderr, "Index out of bounds\n");
+        exit(1);
+    } else {
+        return v->data[i];
+    }
 }
 
 void push_back(vector *v, int x) {

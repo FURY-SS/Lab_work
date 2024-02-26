@@ -4,6 +4,7 @@
 #define UNTITLED_VECTOR_VOID_H
 
 #include <limits.h>
+#include <stdbool.h>
 
 typedef struct vector_void {
     void *data; // указатель на нулевой элемент вектора
@@ -26,5 +27,23 @@ void vector_shrink_to_fit_v(vector_void *v);
 
 // освобождает память, выделенную вектору.
 void delete_vector_v(vector_void *v);
+
+// проверки на то, является ли вектор пустым.
+bool is_empty_v(vector_void *v);
+
+// проверки на то, является ли вектор полным.
+bool is_full_v(vector_void *v);
+
+// записывает по адресу destination index-ый элемент вектора v.
+void get_vector_value_v(vector_void *v, size_t index, void *destination);
+
+// записывает на index-ый элемент вектора v значение, расположенное по адресу source;
+void set_vector_value_v(vector_void *v, size_t index, void *source);
+
+// удаляет последний элемент из вектора.
+void pop_back_v(vector_void *v);
+
+// добавляет элемент x в конец вектора.
+void push_back_v(vector_void *v, void *source);
 
 #endif //UNTITLED_VECTOR_VOID_H

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include "libs/data_structures/vector/vector.h"
+#include "libs/data_structures/vector/vector_void.h"
 
 void test_push_back_empty_vector() {
     vector v = create_vector(0);
@@ -77,7 +78,23 @@ void test() {
 }
 
 int main () {
-    test();
+    size_t n;
+    scanf("%zd", &n);
+
+    vector_void v = create_vector_void(0, sizeof(float));
+    for (int i = 0; i < n; i++) {
+        float x;
+        scanf("%f", &x);
+
+        push_back_v(&v, &x);
+    }
+
+    for (int i = 0; i < n; i++) {
+        float x;
+        get_vector_value_v(&v, i, &x);
+
+        printf("%f ", x);
+    }
 
     return 0;
 }

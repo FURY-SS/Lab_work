@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <malloc.h>
 #include <stdlib.h>
+#include <memory.h>
 #include "../../data_structures/vector/vector_void.h"
 
 vector_void create_vector_void(size_t capacity, size_t base_type_size) {
@@ -52,4 +53,53 @@ void vector_shrink_to_fit_v(vector_void *v) {
         v->data = (void *) realloc(v->data, v->size * v->base_type_size);
         v->capacity = v->size;
     }
+}
+
+bool is_empty_v(vector_void *v) {
+    return v->size == 0;
+}
+
+bool is_full_v(vector_void *v) {
+    return v->size == v->capacity;
+}
+
+void get_vector_value_v(vector_void *v, size_t index, void *destination) {
+    if (index >= v->size) {
+        fprintf(stderr, "Index out of bounds\n");
+        exit(1);
+    } else {
+        char *source = (char *) v->data + index * v->base_type_size;
+        memcpy(destination, source, v->base_type_size);
+    }
+}
+
+void set_vector_value_v(vector_void *v, size_t index, void *source) {
+    if (index >= v->size) {
+        fprintf(stderr, "Index out of bounds\n");
+        exit(1);
+    } else {
+        char *dst = (char *) v->data + index * v->base_type_size;
+        memcpy(dst, source, v->base_type_size);
+    }
+}
+
+void pop_back_v(vector_void *v) {
+    if (is_empty_v(v)) {
+        fprintf(stderr, "bad alloc");
+        exit(1);
+    } else {
+        v->size--;
+    }
+}
+
+void push_back_v(vector_void *v, void *source) {
+    if (v->capacity == 0) {
+        v->capacity++;
+    } else if (is_full_v(v)) {
+        reserve_v(v, v->capacity * 2);
+    }
+
+    char *dst = (char *) v->data + v->size * v->base_type_size;
+    memcpy(dst, source, v->base_type_size);
+    v->size++;
 }
