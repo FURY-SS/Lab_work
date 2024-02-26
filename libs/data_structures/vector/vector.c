@@ -42,7 +42,7 @@ void clear(vector *v) {
 
 void vector_shrink_to_fit(vector *v) {
     if (v->size != v->capacity) {
-        v->data = (int *)realloc(v->data, sizeof(int) * v->size);
+        v->data = (int *) realloc(v->data, sizeof(int) * v->size);
         v->capacity = v->size;
     }
 }
@@ -52,4 +52,35 @@ void delete_vector(vector *v) {
     v->data = NULL;
     v->size = 0;
     v->capacity = 0;
+}
+
+bool is_empty(vector *v) {
+    return v->size == 0;
+}
+
+bool is_full(vector *v) {
+    return v->size == v->capacity;
+}
+
+int get_vector_value(vector *v, size_t i) {
+    return v->data[i];
+}
+
+void push_back(vector *v, int x) {
+    if (v->capacity == 0) {
+        v->capacity++;
+    } else if (is_full(v)) {
+        reserve(v, v->capacity * 2);
+    }
+
+    v->data[v->size++] = x;
+}
+
+void pop_back(vector *v) {
+    if (is_empty(v)) {
+        fprintf(stderr, "bad alloc");
+        exit(1);
+    } else {
+        v->size--;
+    }
 }
