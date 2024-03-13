@@ -16,6 +16,7 @@ add_executable(untitled main.c
         libs/data_structures/unordered_array_set/unordered_array_set.h
         libs/data_structures/vector/vector.c
         libs/data_structures/vector/vector.h
+        libs/data_structures/matrix/matrix.h
 )
 
 add_subdirectory(libs)
