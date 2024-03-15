@@ -1,13 +1,12 @@
 // Created by vadim on 13.03.2024.
 
 #include <stdio.h>
-#include <stdint.h>
 #include <malloc.h>
 #include <stdlib.h>
 #include <memory.h>
 #include "matrix.h"
 
-void swap(int* a, int* b) {
+static void swap(int* a, int* b) {
     int temp = *a;
     *a = *b;
     *b = temp;
@@ -87,16 +86,13 @@ void output_matrices(matrix *ms, int n_matrices) {
 }
 
 void swap_rows(matrix *m, int i1, int i2) {
-    int *temp = m->values[i1];
-    m->values[i1] = m->values[i2];
-    m->values[i2] = temp;
+    swap(m->values[i1], m->values[i2]);
 }
 
 void swap_columns(matrix *m, int j1, int j2) {
     for (int i = 0; i < m->n_rows; i++) {
-        int temp = *(&m->values[i][j1]);
-        *(&m->values[i][j1]) = *(&m->values[i][j2]);
-        *(&m->values[i][j2]) = temp;
+        swap(&m->values[i][j1], &m->values[i][j2]);
+
     }
 }
 
@@ -128,8 +124,9 @@ void selectionSortColsMatrixByColCriteria(matrix *m, int (*criteria)(int*, int))
 
     for (size_t i = 0; i < m->n_cols; i++) {
         int temp[m->n_rows];
-        for (size_t j = 0; j < m->n_rows; j++)
+        for (size_t j = 0; j < m->n_rows; j++) {
             temp[j] = m->values[j][i];
+        }
 
         res_criteria[i] = criteria(temp, m->n_rows);
     }
@@ -138,14 +135,13 @@ void selectionSortColsMatrixByColCriteria(matrix *m, int (*criteria)(int*, int))
     for (int i = 0; i < m->n_cols; i++) {
         value_min_idx = i;
 
-        for (int j = i + 1; j < m->n_cols; j++)
-            if (res_criteria[j] < res_criteria[value_min_idx])
+        for (int j = i + 1; j < m->n_cols; j++) {
+            if (res_criteria[j] < res_criteria[value_min_idx]) {
                 value_min_idx = j;
+            }
+        }
 
-        int temp = *(&res_criteria[value_min_idx]);
-        *(&res_criteria[value_min_idx]) = *(&res_criteria[i]);
-        *(&res_criteria[i]) = temp;
-
+        swap(&res_criteria[value_min_idx], &res_criteria[i]);
         swap_columns(m, value_min_idx, i);
     }
 }
@@ -210,9 +206,7 @@ void transpose_square_matrix(matrix *m) {
     for (int i = 0; i < m->n_rows; i++) {
         for (int j = i + 1; j < m->n_cols; j++) {
             if (i != j) {
-                int temp = m->values[i][j];
-                m->values[i][j] = m->values[j][i];
-                m->values[j][i] = temp;
+                swap(&m->values[i][j], &m->values[j][i]);
             }
         }
     }
