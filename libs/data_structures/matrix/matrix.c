@@ -7,6 +7,12 @@
 #include <memory.h>
 #include "matrix.h"
 
+void swap(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
 matrix get_mem_matrix(int n_rows, int n_cols) {
     int **values = (int **) malloc(sizeof(int *) * n_rows);
 
@@ -144,11 +150,151 @@ void selectionSortColsMatrixByColCriteria(matrix *m, int (*criteria)(int*, int))
     }
 }
 
-bool is_square_matrix(matrix *m) {}
+bool is_square_matrix(matrix *m) {
+    return m->n_rows == m->n_cols;
+}
 
-bool are_two_matrices_equal(matrix *m1, matrix *m2) {}
+bool are_two_matrices_equal(matrix *m1, matrix *m2) {
+    if (m1->n_rows != m2->n_rows || m1->n_cols != m2->n_cols) {
+        return false;
+    }
 
-bool is_e_matrix(matrix *m) {}
+    for (int i = 0; i < m1->n_rows; i++) {
+        for (int j = 0; j < m1->n_cols; j++) {
+            if (m1->values[i][j] != m2->values[i][j]) {
+                return false;
+            }
+        }
+    }
 
-bool is_symmetric_matrix(matrix *m) {}
+    return true;
+}
 
+bool is_e_matrix(matrix *m) {
+    if (m->n_rows != m->n_cols) {
+        fprintf(stderr, "Is not square matrix");
+        exit(1);
+    }
+
+    for (int i = 0; i < m->n_rows; i++) {
+        for (int j = 0; j < m->n_cols; j++) {
+            if (i == j && m->values[i][j] != 1) {
+                return false;
+            } else if (i != j && m->values[i][j] != 0) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+bool is_symmetric_matrix(matrix *m) {
+    for (int i = 0; i < m->n_rows; i++) {
+        for (int j = i + 1; j < m->n_cols; j++) {
+            if (m->values[i][j] != m->values[j][i]) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+void transpose_square_matrix(matrix *m) {
+    if (m->n_rows != m->n_cols) {
+        fprintf(stderr, "Is not square matrix");
+        exit(1);
+    }
+
+    for (int i = 0; i < m->n_rows; i++) {
+        for (int j = i + 1; j < m->n_cols; j++) {
+            if (i != j) {
+                int temp = m->values[i][j];
+                m->values[i][j] = m->values[j][i];
+                m->values[j][i] = temp;
+            }
+        }
+    }
+}
+
+void transpose_matrix(matrix *m) {
+    int** new_value = (int**) malloc(sizeof(int*) * m->n_cols);
+
+    for (int i = 0; i < m->n_cols; i++) {
+        new_value[i] = (int*) malloc(sizeof(int) * m->n_rows);
+
+        for (int j = 0; j < m->n_rows; j++) {
+            new_value[i][j] = m->values[j][i];
+        }
+    }
+
+    for (int i = 0; i < m->n_rows; i++)
+        free(m->values[i]);
+    free(m->values);
+
+    m->values = new_value;
+    swap(&m->n_rows, &m->n_cols);
+}
+
+position get_min_value_pos(matrix m) {
+    int min_value = m.values[0][0];
+    position pos = {0, 0};
+
+    for (int i = 1; i < m.n_rows; i++) {
+        for (int j = 1; j < m.n_cols; j++) {
+            if (m.values[i][j] < min_value) {
+                min_value = m.values[i][j];
+                pos.row_index = i;
+                pos.col_index = j;
+            }
+        }
+    }
+
+    return pos;
+}
+
+position get_max_value_pos(matrix m) {
+    int max_value = m.values[0][0];
+    position pos = {0, 0};
+
+    for (int i = 0; i < m.n_rows; i++) {
+        for (int j = 0; j < m.n_cols; j++) {
+            if (m.values[i][j] > max_value) {
+                max_value = m.values[i][j];
+                pos.row_index = i;
+                pos.col_index = j;
+            }
+        }
+    }
+
+    return pos;
+}
+
+matrix create_matrix_from_array(const int a[], int n_rows, int n_cols) {
+    matrix m = get_mem_matrix(n_rows, n_cols);
+
+    int k = 0;
+    for (int i = 0; i < n_rows; i++) {
+        for (int j = 0; j < n_cols; j++) {
+            m.values[i][j] = a[k++];
+        }
+    }
+
+    return m;
+}
+
+matrix* create_array_of_matrix_from_array(const int values[], size_t n_matrices, size_t n_rows, size_t n_cols) {
+    matrix* ms = get_mem_array_of_matrices(n_matrices, n_rows, n_cols);
+
+    int l = 0;
+    for (size_t k = 0; k < n_matrices; k++) {
+        for (size_t i = 0; i < n_rows; i++) {
+            for (size_t j = 0; j < n_cols; j++) {
+                ms[k].values[i][j] = values[l++];
+            }
+        }
+    }
+
+    return ms;
+}

@@ -65,5 +65,23 @@ bool is_e_matrix(matrix *m);
 // возвращает значение ’истина’, если матрица m является симметричной, ложь – в противном случае.
 bool is_symmetric_matrix(matrix *m);
 
+// транспонирует квадратную матрицу m.
+void transpose_square_matrix(matrix *m);
+
+// транспонирует матрицу m.
+void transpose_matrix(matrix *m);
+
+// возвращает позицию минимального элемента матрицы m.
+position get_min_value_pos(matrix m);
+
+// возвращает позицию максимального элемента матрицы m.
+position get_max_value_pos(matrix m);
+
+// возвращает матрицу размера n_rows на n_cols, построенную из элементов массива a.
+matrix create_matrix_from_array(const int a[], int n_rows, int n_cols);
+
+// возвращает указатель на нулевую матрицу массива из n_matrices матриц, размещенных
+//в динамической памяти, построенных из элементов массива a.
+matrix* create_array_of_matrix_from_array(const int values[], size_t n_matrices, size_t n_rows, size_t n_cols);
 
 #endif //UNTITLED_MATRIX_H
