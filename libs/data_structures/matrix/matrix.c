@@ -1,12 +1,11 @@
-// Created by vadim on 13.03.2024.
+// Created by Vadim on 13.03.2024.
 
 #include <stdio.h>
 #include <malloc.h>
 #include <stdlib.h>
-#include <memory.h>
 #include "matrix.h"
 
-static void swap(int* a, int* b) {
+static void swap(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
@@ -86,7 +85,9 @@ void output_matrices(matrix *ms, int n_matrices) {
 }
 
 void swap_rows(matrix *m, int i1, int i2) {
-    swap(m->values[i1], m->values[i2]);
+    int* temp = m->values[i1];
+    m->values[i1] = m->values[i2];
+    m->values[i2] = temp;
 }
 
 void swap_columns(matrix *m, int j1, int j2) {
@@ -119,7 +120,7 @@ void insertion_sort_rows_matrix_by_row_criteria(matrix *m, int (*criteria)(int*,
     }
 }
 
-void selectionSortColsMatrixByColCriteria(matrix *m, int (*criteria)(int*, int)) {
+void selection_sort_cols_matrix_by_col_criteria(matrix *m, int (*criteria)(int*, int)) {
     int res_criteria[m->n_cols];
 
     for (size_t i = 0; i < m->n_cols; i++) {

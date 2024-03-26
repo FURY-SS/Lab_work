@@ -51,7 +51,7 @@ void swap_columns(matrix *m, int j1, int j2);
 void insertion_sort_rows_matrix_by_row_criteria(matrix *m, int (*criteria)(int*, int));
 
 // выполняет сортировку выбором столбцов матрицы m по неубыванию значения функции criteria применяемой для столбцов.
-void selectionSortColsMatrixByColCriteria(matrix *m, int (*criteria)(int*, int));
+void selection_sort_cols_matrix_by_col_criteria(matrix *m, int (*criteria)(int*, int));
 
 // возвращает значение ’истина’, если матрица m является квадратной, ложь – в противном случае.
 bool is_square_matrix(matrix *m);
