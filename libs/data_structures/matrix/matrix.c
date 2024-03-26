@@ -295,3 +295,7 @@ void swap_min_max_rows(matrix* m) {
 
     swap_rows(m, max.row_index, min.row_index);
 }
+
+void sort_rows_by_max_element(matrix *m) {
+    insertion_sort_rows_matrix_by_row_criteria(m, get_max);
+}

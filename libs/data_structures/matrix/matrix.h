@@ -87,4 +87,7 @@ matrix* create_array_of_matrix_from_array(const int values[], size_t n_matrices,
 // меняет местами строки матрицы m, в которых находятся максимальный и минимальный элемент
 void swap_min_max_rows(matrix* m);
 
+// сортирует строки матрицы m по не убыванию наибольших элементов строк
+void sort_rows_by_max_element(matrix* m);
+
 #endif //UNTITLED_MATRIX_H
