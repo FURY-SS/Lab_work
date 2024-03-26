@@ -261,7 +261,7 @@ position get_max_value_pos(matrix m) {
     return pos;
 }
 
-matrix create_matrix_from_array(const int a[], int n_rows, int n_cols) {
+matrix create_matrix_from_array(const int *a, int n_rows, int n_cols) {
     matrix m = get_mem_matrix(n_rows, n_cols);
 
     int k = 0;
@@ -274,7 +274,7 @@ matrix create_matrix_from_array(const int a[], int n_rows, int n_cols) {
     return m;
 }
 
-matrix* create_array_of_matrix_from_array(const int values[], size_t n_matrices, size_t n_rows, size_t n_cols) {
+matrix* create_array_of_matrix_from_array(const int *values, size_t n_matrices, size_t n_rows, size_t n_cols) {
     matrix* ms = get_mem_array_of_matrices(n_matrices, n_rows, n_cols);
 
     int l = 0;
@@ -298,4 +298,8 @@ void swap_min_max_rows(matrix* m) {
 
 void sort_rows_by_max_element(matrix *m) {
     insertion_sort_rows_matrix_by_row_criteria(m, get_max);
+}
+
+void sort_cols_by_min_element(matrix *m) {
+    selection_sort_cols_matrix_by_col_criteria(m, get_min);
 }

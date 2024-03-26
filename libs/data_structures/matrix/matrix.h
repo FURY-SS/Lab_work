@@ -78,16 +78,19 @@ position get_min_value_pos(matrix m);
 position get_max_value_pos(matrix m);
 
 // возвращает матрицу размера n_rows на n_cols, построенную из элементов массива a.
-matrix create_matrix_from_array(const int a[], int n_rows, int n_cols);
+matrix create_matrix_from_array(const int *a, int n_rows, int n_cols);
 
 // возвращает указатель на нулевую матрицу массива из n_matrices матриц, размещенных
 //в динамической памяти, построенных из элементов массива a.
-matrix* create_array_of_matrix_from_array(const int values[], size_t n_matrices, size_t n_rows, size_t n_cols);
+matrix* create_array_of_matrix_from_array(const int *values, size_t n_matrices, size_t n_rows, size_t n_cols);
 
 // меняет местами строки матрицы m, в которых находятся максимальный и минимальный элемент
-void swap_min_max_rows(matrix* m);
+void swap_min_max_rows(matrix *m);
 
 // сортирует строки матрицы m по не убыванию наибольших элементов строк
-void sort_rows_by_max_element(matrix* m);
+void sort_rows_by_max_element(matrix *m);
+
+// сортирует столбцы матрицы m по не убыванию наименьших элементов столбцов
+void sort_cols_by_min_element(matrix *m);
 
 #endif //UNTITLED_MATRIX_H

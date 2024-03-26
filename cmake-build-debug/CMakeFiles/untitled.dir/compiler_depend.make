@@ -163,7 +163,12 @@ CMakeFiles/untitled.dir/main.c.obj: C:/Users/vadim/CLionProjects/Lab_work/main.c
   C:/Program\ Files/JetBrains/CLion\ 2023.2.1/bin/mingw/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.1/bin/mingw/x86_64-w64-mingw32/include/_mingw_off_t.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.2.1/bin/mingw/x86_64-w64-mingw32/include/swprintf.inl \
-  C:/Program\ Files/JetBrains/CLion\ 2023.2.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h
+  C:/Program\ Files/JetBrains/CLion\ 2023.2.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.2.1/bin/mingw/x86_64-w64-mingw32/include/assert.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.2.1/bin/mingw/x86_64-w64-mingw32/include/crtdefs.h \
+  C:/Users/vadim/CLionProjects/Lab_work/libs/data_structures/matrix/matrix.h \
+  C:/Program\ Files/JetBrains/CLion\ 2023.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdbool.h \
+  C:/Users/vadim/CLionProjects/Lab_work/libs/algorithms/algorithms.h
 
 
 C:/Program\ Files/JetBrains/CLion\ 2023.2.1/bin/mingw/x86_64-w64-mingw32/include/vadefs.h:
@@ -222,6 +227,8 @@ C:/Program\ Files/JetBrains/CLion\ 2023.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32
 
 C:/Users/vadim/CLionProjects/Lab_work/libs/data_structures/bitset/bitset.c:
 
+C:/Users/vadim/CLionProjects/Lab_work/libs/data_structures/matrix/matrix.h:
+
 C:/Users/vadim/CLionProjects/Lab_work/libs/data_structures/bitset/bitset.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2023.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h:
@@ -229,6 +236,8 @@ C:/Program\ Files/JetBrains/CLion\ 2023.2.1/bin/mingw/lib/gcc/x86_64-w64-mingw32
 C:/Program\ Files/JetBrains/CLion\ 2023.2.1/bin/mingw/x86_64-w64-mingw32/include/stdint.h:
 
 C:/Users/vadim/CLionProjects/Lab_work/libs/data_structures/ordered_array_set/ordered_array_set.c:
+
+C:/Users/vadim/CLionProjects/Lab_work/libs/algorithms/algorithms.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2023.2.1/bin/mingw/x86_64-w64-mingw32/include/malloc.h:
 
