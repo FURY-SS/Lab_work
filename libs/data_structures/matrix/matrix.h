@@ -84,4 +84,7 @@ matrix create_matrix_from_array(const int a[], int n_rows, int n_cols);
 //в динамической памяти, построенных из элементов массива a.
 matrix* create_array_of_matrix_from_array(const int values[], size_t n_matrices, size_t n_rows, size_t n_cols);
 
+// меняет местами строки матрицы m, в которых находятся максимальный и минимальный элемент
+void swap_min_max_rows(matrix* m);
+
 #endif //UNTITLED_MATRIX_H

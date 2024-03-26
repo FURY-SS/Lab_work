@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/vadim/CLionProjects/untitled/libs/algorithms
+# Install script for directory: C:/Users/vadim/CLionProjects/Lab_work/libs/algorithms
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -4,12 +4,7 @@
 #include <malloc.h>
 #include <stdlib.h>
 #include "matrix.h"
-
-static void swap(int *a, int *b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
+#include "../../algorithms/algorithms.h"
 
 matrix get_mem_matrix(int n_rows, int n_cols) {
     int **values = (int **) malloc(sizeof(int *) * n_rows);
@@ -292,4 +287,11 @@ matrix* create_array_of_matrix_from_array(const int values[], size_t n_matrices,
     }
 
     return ms;
+}
+
+void swap_min_max_rows(matrix* m) {
+    position max = get_max_value_pos(*m);
+    position min = get_min_value_pos(*m);
+
+    swap_rows(m, max.row_index, min.row_index);
 }
