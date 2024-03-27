@@ -13,4 +13,7 @@ int get_max(int *a, int n);
 // возвращает минимальный элемент массива a размера n
 int get_min(int *a, int n);
 
+// возвращает сумму элементов массива a размера n
+long long get_sum(int *a, int n);
+
 #endif //UNTITLED_ALGORITHMS_H

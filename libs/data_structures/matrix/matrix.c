@@ -334,3 +334,26 @@ void get_square_of_matrix_if_symmetric(matrix *m) {
     m->n_rows = res.n_rows;
     m->n_cols = res.n_cols;
 }
+
+bool is_unique(long long *a, int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (a[i] == a[j]) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+void transpose_if_matrix_has_not_equal_sum_of_rows(matrix *m) {
+    long long sum[m->n_rows];
+
+    for (int i = 0; i < m->n_rows; i++) {
+        sum[i] = get_sum(m->values[i], m->n_cols);
+    }
+
+    if (is_unique(sum, m->n_rows))
+        transpose_square_matrix(m);
+}

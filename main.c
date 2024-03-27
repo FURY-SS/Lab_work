@@ -249,6 +249,57 @@ void test_get_square_of_matrix_if_symmetric() {
     test_get_square_of_matrix_if_symmetric_e_matrix();
 }
 
+void test_transpose_if_matrix_has_not_equal_sum_of_rows_difference_value() {
+    matrix m = create_matrix_from_array((int[]) {1, 2, 3,
+                                                 4, 5, 6,
+                                                 7, 8, 9}, 3, 3);
+
+    matrix check = create_matrix_from_array((int[]) {1, 4, 7,
+                                                     2, 5, 8,
+                                                     3, 6, 9}, 3, 3);
+
+    transpose_if_matrix_has_not_equal_sum_of_rows(&m);
+
+    assert(are_two_matrices_equal(&m, &check));
+
+    free_mem_matrix(&m);
+    free_mem_matrix(&check);
+}
+
+void test_transpose_if_matrix_has_not_equal_sum_of_rows_not_different_sum() {
+    matrix m = create_matrix_from_array((int[]) {1, 0, 2,
+                                                 4, 5, 6,
+                                                 2, 1, 0}, 3, 3);
+
+    matrix check = create_matrix_from_array((int[]) {1, 0, 2,
+                                                     4, 5, 6,
+                                                     2, 1, 0}, 3, 3);
+
+    transpose_if_matrix_has_not_equal_sum_of_rows(&m);
+
+    assert(are_two_matrices_equal(&m, &check));
+
+    free_mem_matrix(&m);
+    free_mem_matrix(&check);
+}
+
+void test_transpose_if_matrix_has_not_equal_sum_of_rows() {
+    test_transpose_if_matrix_has_not_equal_sum_of_rows_difference_value();
+    test_transpose_if_matrix_has_not_equal_sum_of_rows_not_different_sum();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 void test() {
@@ -256,6 +307,7 @@ void test() {
     test_sort();
     test_mul_matrices();
     test_get_square_of_matrix_if_symmetric();
+    test_transpose_if_matrix_has_not_equal_sum_of_rows();
 }
 
 int main () {

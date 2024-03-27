@@ -98,10 +98,14 @@ void sort_cols_by_min_element(matrix *m);
 // возвращает матрицу, равную перемножению матрицы m1 на матрицу m2
 matrix mul_matrices(matrix m1, matrix m2);
 
-//
+// заменяет исходную матрицу m, если она является симметричной, на её квадрат
 void get_square_of_matrix_if_symmetric(matrix *m);
 
-//
+// возвращает истину, если массив a размера n состоит только из уникальных элементов
+bool is_unique(long long *a, int n);
+
+// транспонирует матрицу, если суммы строк различны
+void transpose_if_matrix_has_not_equal_sum_of_rows(matrix *m);
 
 
 #endif //UNTITLED_MATRIX_H
