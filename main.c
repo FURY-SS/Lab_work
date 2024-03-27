@@ -335,7 +335,34 @@ void test_find_sum_of_maxes_of_pseudo_diagonal_difference_value() {
     free_mem_matrix(&m);
 }
 
+void test_get_min_in_area_difference_value() {
+    matrix m = create_matrix_from_array((int[]) {10, 7, 5, 6,
+                                                 3, 11, 8, 9,
+                                                 4, 1, 12, 2}, 3, 4);
 
+    int result = get_min_in_area(m);
+
+    assert(result == 5);
+
+    free_mem_matrix(&m);
+}
+
+void test_get_min_in_area_max_value_first() {
+    matrix m = create_matrix_from_array((int[]) {12, 7, 5, 6,
+                                                 3, 11, 8, 9,
+                                                 4, 1, 7, 2}, 3, 4);
+
+    int result = get_min_in_area(m);
+
+    assert(result == 12);
+
+    free_mem_matrix(&m);
+}
+
+void test_get_min_in_area() {
+    test_get_min_in_area_difference_value();
+    test_get_min_in_area_max_value_first();
+}
 
 
 
@@ -365,6 +392,7 @@ void test() {
     test_transpose_if_matrix_has_not_equal_sum_of_rows();
     test_is_mutually_inverse_matrices();
     test_find_sum_of_maxes_of_pseudo_diagonal_difference_value();
+    test_get_min_in_area();
 }
 
 int main () {

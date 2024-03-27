@@ -394,3 +394,25 @@ long long find_sum_of_maxes_of_pseudo_diagonal(matrix m) {
 
     return sum;
 }
+
+bool value_in_area(position max, int i, int j) {
+    position new_position = {i - max.row_index, j - max.col_index};
+
+    return (new_position.row_index <= new_position.col_index) && (new_position.row_index <= -new_position.col_index);
+}
+
+int get_min_in_area(matrix m) {
+    position max = get_max_value_pos(m);
+    int min = INT_MAX;
+
+    for (int i = 0; i <= max.row_index; i++) {
+        for (int j = 0; j < m.n_cols; j++) {
+            if (value_in_area(max,i,j) && m.values[i][j] < min) {
+                min = m.values[i][j];
+            }
+        }
+    }
+
+    return min;
+}
+

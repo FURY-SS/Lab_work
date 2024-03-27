@@ -113,7 +113,11 @@ bool is_mutually_inverse_matrices(matrix m1, matrix m2);
 // возвращает сумму максимальных положительный элементов псевдодиагоналей матрицы m
 long long find_sum_of_maxes_of_pseudo_diagonal(matrix m);
 
-//
+// возвращает истина, если элемент по индексу i,j находится в области элемента max.
+bool value_in_area(position max, int i, int j);
+
+// возвращает минимальный положительный элемент матрицы m, который находится в зоне.
+int get_min_in_area(matrix m);
 
 
 #endif //UNTITLED_MATRIX_H
