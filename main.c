@@ -323,6 +323,32 @@ void test_is_mutually_inverse_matrices() {
     test_is_mutually_inverse_matrices_not_inverse();
 }
 
+void test_find_sum_of_maxes_of_pseudo_diagonal_difference_value() {
+    matrix m = create_matrix_from_array((int[]){3, 2, 5, 4,
+                                                1, 3, 6, 3,
+                                                3, 2, 1, 2}, 3, 4);
+
+    long long res = find_sum_of_maxes_of_pseudo_diagonal(m);
+
+    assert(res == 20);
+
+    free_mem_matrix(&m);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -338,6 +364,7 @@ void test() {
     test_get_square_of_matrix_if_symmetric();
     test_transpose_if_matrix_has_not_equal_sum_of_rows();
     test_is_mutually_inverse_matrices();
+    test_find_sum_of_maxes_of_pseudo_diagonal_difference_value();
 }
 
 int main () {

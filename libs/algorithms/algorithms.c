@@ -37,3 +37,7 @@ long long get_sum(int *a, int n) {
 
     return res;
 }
+
+int max(int a, int b) {
+    return (a > b) ? a : b;
+}

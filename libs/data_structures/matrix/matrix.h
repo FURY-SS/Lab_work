@@ -107,8 +107,11 @@ bool is_unique(long long *a, int n);
 // транспонирует матрицу, если суммы строк различны
 void transpose_if_matrix_has_not_equal_sum_of_rows(matrix *m);
 
-//
+// возвращает истина, если матрицы m1 и m2 являются взаимно обратными
 bool is_mutually_inverse_matrices(matrix m1, matrix m2);
+
+// возвращает сумму максимальных положительный элементов псевдодиагоналей матрицы m
+long long find_sum_of_maxes_of_pseudo_diagonal(matrix m);
 
 //
 
