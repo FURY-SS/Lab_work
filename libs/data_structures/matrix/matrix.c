@@ -357,3 +357,13 @@ void transpose_if_matrix_has_not_equal_sum_of_rows(matrix *m) {
     if (is_unique(sum, m->n_rows))
         transpose_square_matrix(m);
 }
+
+bool is_mutually_inverse_matrices(matrix m1, matrix m2) {
+    matrix res = mul_matrices(m1, m2);
+
+    bool is_e_m = is_e_matrix(&res);
+
+    free_mem_matrix(&res);
+
+    return is_e_m;
+}

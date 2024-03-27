@@ -288,11 +288,40 @@ void test_transpose_if_matrix_has_not_equal_sum_of_rows() {
     test_transpose_if_matrix_has_not_equal_sum_of_rows_not_different_sum();
 }
 
+void test_is_mutually_inverse_matrices_inverse() {
+    matrix m1 = create_matrix_from_array((int[]){3,-5,
+                                                 1,-2},2,2);
 
+    matrix m2 = create_matrix_from_array((int[]){2,-5,
+                                                 1,-3},2,2);
 
+    bool res = is_mutually_inverse_matrices(m1,m2);
 
+    assert(res);
 
+    free_mem_matrix(&m1);
+    free_mem_matrix(&m2);
+}
 
+void test_is_mutually_inverse_matrices_not_inverse() {
+    matrix m1 = create_matrix_from_array((int[]){1,-5,
+                                                 1,-2},2,2);
+
+    matrix m2 = create_matrix_from_array((int[]){2,-5,
+                                                 1,-5},2,2);
+
+    bool res = is_mutually_inverse_matrices(m1,m2);
+
+    assert(!res);
+
+    free_mem_matrix(&m1);
+    free_mem_matrix(&m2);
+}
+
+void test_is_mutually_inverse_matrices() {
+    test_is_mutually_inverse_matrices_inverse();
+    test_is_mutually_inverse_matrices_not_inverse();
+}
 
 
 
@@ -308,6 +337,7 @@ void test() {
     test_mul_matrices();
     test_get_square_of_matrix_if_symmetric();
     test_transpose_if_matrix_has_not_equal_sum_of_rows();
+    test_is_mutually_inverse_matrices();
 }
 
 int main () {

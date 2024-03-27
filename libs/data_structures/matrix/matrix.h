@@ -107,5 +107,10 @@ bool is_unique(long long *a, int n);
 // транспонирует матрицу, если суммы строк различны
 void transpose_if_matrix_has_not_equal_sum_of_rows(matrix *m);
 
+//
+bool is_mutually_inverse_matrices(matrix m1, matrix m2);
+
+//
+
 
 #endif //UNTITLED_MATRIX_H
