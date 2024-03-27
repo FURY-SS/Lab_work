@@ -84,6 +84,8 @@ matrix create_matrix_from_array(const int *a, int n_rows, int n_cols);
 //в динамической памяти, построенных из элементов массива a.
 matrix* create_array_of_matrix_from_array(const int *values, size_t n_matrices, size_t n_rows, size_t n_cols);
 
+//***********************************************************
+
 // меняет местами строки матрицы m, в которых находятся максимальный и минимальный элемент
 void swap_min_max_rows(matrix *m);
 
@@ -92,5 +94,14 @@ void sort_rows_by_max_element(matrix *m);
 
 // сортирует столбцы матрицы m по не убыванию наименьших элементов столбцов
 void sort_cols_by_min_element(matrix *m);
+
+// возвращает матрицу, равную перемножению матрицы m1 на матрицу m2
+matrix mul_matrices(matrix m1, matrix m2);
+
+//
+void get_square_of_matrix_if_symmetric(matrix *m);
+
+//
+
 
 #endif //UNTITLED_MATRIX_H

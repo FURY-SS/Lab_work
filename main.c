@@ -117,21 +117,145 @@ void test_sort() {
     test_sort_cols_by_min_element_min_value_equal();
 }
 
+void test_mul_matrices_difference_value() {
+    matrix m1 = create_matrix_from_array((int[]){1,2,3,
+                                                4,5,6,
+                                                7,8,9}, 3, 3);
 
+    matrix m2 = create_matrix_from_array((int[]){1,2,3,
+                                                4,5,6,
+                                                7,8,9}, 3, 3);
 
+    matrix res = mul_matrices(m1, m2);
 
+    matrix check = create_matrix_from_array((int[]){30,36,42,
+                                                    66,81,96,
+                                                    102,126,150},3,3);
 
+    assert(are_two_matrices_equal(&res, &check));
 
+    free_mem_matrix(&m1);
+    free_mem_matrix(&m2);
+    free_mem_matrix(&res);
+    free_mem_matrix(&check);
+}
 
+void test_mul_matrices_to_null_matrix() {
+    matrix m1 = create_matrix_from_array((int[]){1,2,3,
+                                                 4,5,6,
+                                                 7,8,9}, 3, 3);
 
+    matrix m2 = create_matrix_from_array((int[]){1,0,0,
+                                                 0,1,0,
+                                                 0,0,1}, 3, 3);
 
+    matrix res = mul_matrices(m1, m2);
 
+    matrix check = create_matrix_from_array((int[]){1,2,3,
+                                                 4,5,6,
+                                                 7,8,9}, 3, 3);
+
+    assert(are_two_matrices_equal(&res, &check));
+
+    free_mem_matrix(&m1);
+    free_mem_matrix(&m2);
+    free_mem_matrix(&res);
+    free_mem_matrix(&check);
+}
+
+void test_mul_matrices_to_e_matrix() {
+    matrix m1 = create_matrix_from_array((int[]){1,2,3,
+                                                 4,5,6,
+                                                 7,8,9}, 3, 3);
+
+    matrix m2 = create_matrix_from_array((int[]){0,0,0,
+                                                 0,0,0,
+                                                 0,0,0}, 3, 3);
+
+    matrix res = mul_matrices(m1, m2);
+
+    matrix check = create_matrix_from_array((int[]){0,0,0,
+                                                    0,0,0,
+                                                    0,0,0}, 3, 3);
+
+    assert(are_two_matrices_equal(&res, &check));
+
+    free_mem_matrix(&m1);
+    free_mem_matrix(&m2);
+    free_mem_matrix(&res);
+    free_mem_matrix(&check);
+}
+
+void test_mul_matrices() {
+    test_mul_matrices_difference_value();
+    test_mul_matrices_to_null_matrix();
+    test_mul_matrices_to_e_matrix();
+}
+
+void test_get_square_of_matrix_if_symmetric_symmetric_matrix() {
+    matrix m = create_matrix_from_array((int[]) {1, 2, 3,
+                                                 2, 5, 6,
+                                                 3, 6, 9}, 3, 3);
+
+    matrix check = create_matrix_from_array((int[]) {14, 30, 42,
+                                                     30, 65, 90,
+                                                     42, 90, 126}, 3, 3);
+
+    get_square_of_matrix_if_symmetric(&m);
+
+    assert(are_two_matrices_equal(&m, &check));
+
+    free_mem_matrix(&m);
+    free_mem_matrix(&check);
+}
+
+void test_get_square_of_matrix_if_symmetric_not_symmetric_matrix() {
+    matrix m = create_matrix_from_array((int[]) {1, 2, 3,
+                                                 4, 5, 6,
+                                                 7, 8, 9}, 3, 3);
+
+    matrix check = create_matrix_from_array((int[]) {1, 2, 3,
+                                                     4, 5, 6,
+                                                     7, 8, 9}, 3, 3);
+
+    get_square_of_matrix_if_symmetric(&m);
+
+    assert(are_two_matrices_equal(&m, &check));
+
+    free_mem_matrix(&m);
+    free_mem_matrix(&check);
+}
+
+void test_get_square_of_matrix_if_symmetric_e_matrix() {
+    matrix m = create_matrix_from_array((int[]) {1, 0, 0,
+                                                 0, 1, 0,
+                                                 0, 0, 1}, 3, 3);
+
+    matrix check = create_matrix_from_array((int[]) {1, 0, 0,
+                                                     0, 1, 0,
+                                                     0, 0, 1}, 3, 3);
+
+    get_square_of_matrix_if_symmetric(&m);
+
+    assert(are_two_matrices_equal(&m, &check));
+
+    free_mem_matrix(&m);
+    free_mem_matrix(&check);
+}
+
+void test_get_square_of_matrix_if_symmetric() {
+    test_get_square_of_matrix_if_symmetric_symmetric_matrix();
+    test_get_square_of_matrix_if_symmetric_not_symmetric_matrix();
+    test_get_square_of_matrix_if_symmetric_e_matrix();
+}
 
 
 
 void test() {
     test_swap_min_max_rows();
     test_sort();
+    test_mul_matrices();
+    test_get_square_of_matrix_if_symmetric();
 }
 
 int main () {

@@ -303,3 +303,34 @@ void sort_rows_by_max_element(matrix *m) {
 void sort_cols_by_min_element(matrix *m) {
     selection_sort_cols_matrix_by_col_criteria(m, get_min);
 }
+
+matrix mul_matrices(matrix m1, matrix m2) {
+    if (m1.n_cols != m2.n_rows) {
+        fprintf(stderr, "It is not a square matrix");
+        exit(1);
+    }
+
+    matrix res = get_mem_matrix(m1.n_rows, m2.n_rows);
+    for (int i = 0; i < m1.n_rows; i++)
+        for (int j = 0; j < m2.n_cols; j++) {
+            res.values[i][j] = 0;
+            for (int k = 0; k < m1.n_cols; k++)
+                res.values[i][j] += m1.values[i][k] * m2.values[k][j];
+        }
+
+    return res;
+}
+
+void get_square_of_matrix_if_symmetric(matrix *m) {
+    if (!is_symmetric_matrix(m)) {
+        return;
+    }
+
+    matrix res = mul_matrices(*m, *m);
+
+    free_mem_matrix(m);
+
+    m->values = res.values;
+    m->n_rows = res.n_rows;
+    m->n_cols = res.n_cols;
+}
